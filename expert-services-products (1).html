@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Services - Products & Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 193, 7, 0.2);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: #ffc107;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #ffc107;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffc107;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.2) 0%, transparent 70%);
+            animation: pulse 8s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #ffc107 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #cccccc;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #ffc107 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            color: #aaaaaa;
+            font-size: 18px;
+        }
+
+        /* Service Cards Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 100px;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, rgba(26, 10, 46, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffc107;
+            box-shadow: 0 20px 60px rgba(255, 193, 7, 0.3);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #8a2be2 0%, #ffc107 100%);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .product-card h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #ffc107;
+        }
+
+        .product-card p {
+            color: #cccccc;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 18px;
+            color: #aaaaaa;
+        }
+
+        .features {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .features li {
+            padding: 10px 0;
+            color: #cccccc;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8a2be2 0%, #ffc107 100%);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 2px solid #ffc107;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 193, 7, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #ffffff;
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.5);
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(37, 211, 102, 0.7);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 193, 7, 0.2);
+        }
+
+        footer p {
+            color: #aaaaaa;
+            margin: 10px 0;
+        }
+
+        footer .social-links {
+            margin-top: 20px;
+        }
+
+        footer .social-links a {
+            color: #ffc107;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        footer .social-links a:hover {
+            color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .whatsapp-float {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo"><span>E</span>xpert Services</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#services">Services</a>
+            <a href="#digital">Digital Products</a>
+            <a href="#physical">Merchandise</a>
+            <a href="expert-services-contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Premium Products & Services</h1>
+        <p>Transform your business with our expert solutions. Quality services and digital products designed for excellence.</p>
+    </div>
+
+    <!-- Featured Services Section -->
+    <div class="container" id="services">
+        <div class="section-header">
+            <h2>⚡ Featured Services</h2>
+            <p>Professional Sales & Marketing packages tailored for your success</p>
+        </div>
+        <div class="products-grid">
+            <!-- Service 1 -->
+            <div class="product-card">
+                <div class="card-badge">Popular</div>
+                <div class="card-icon">🚀</div>
+                <h3>Starter Package</h3>
+                <p>Perfect for small businesses looking to establish their digital presence and reach their first customers.</p>
+                <div class="price">$499 <span>/ month</span></div>
+                <ul class="features">
+                    <li>Social Media Management</li>
+                    <li>Basic SEO Optimization</li>
+                    <li>Email Marketing Setup</li>
+                    <li>Monthly Analytics Report</li>
+                    <li>24/7 Support</li>
+                </ul>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="contactWhatsApp('Starter Package - $499/month')">Get Started</button>
+                    <button class="btn btn-secondary" onclick="contactWhatsApp('I want more details about Starter Package')">View Details</button>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="product-card">
+                <div class="card-badge">Best Value</div>
+                <div class="card-icon">💼</div>
+                <h3>Professional Package</h3>
+                <p>Comprehensive marketing solution for growing businesses ready to scale their operations.</p>
+                <div class="price">$999 <span>/ month</span></div>
+                <ul class="features">
+                    <li>Everything in Starter</li>
+                    <li>Advanced SEO & SEM</li>
+                    <li>Content Marketing Strategy</li>
+                    <li>Lead Generation Campaigns</li>
+                    <li>Bi-weekly Strategy Calls</li>
+                    <li>Custom Analytics Dashboard</li>
+                </ul>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="contactWhatsApp('Professional Package - $999/month')">Get Started</button>
+                    <button class="btn btn-secondary" onclick="contactWhatsApp('I want more details about Professional Package')">View Details</button>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="product-card">
+                <div class="card-badge">Premium</div>
+                <div class="card-icon">👑</div>
+                <h3>Enterprise Package</h3>
+                <p>Full-scale marketing automation and sales optimization for established businesses.</p>
+                <div class="price">$2,499 <span>/ month</span></div>
+                <ul class="features">
+                    <li>Everything in Professional</li>
+                    <li>Marketing Automation</li>
+                    <li>CRM Integration & Management</li>
+                    <li>Video Production & Ads</li>
+                    <li>Dedicated Account Manager</li>
+                    <li>Weekly Performance Reviews</li>
+                    <li>Priority Support</li>
+                </ul>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="contactWhatsApp('Enterprise Package - $2,499/month')">Get Started</button>
+                    <button class="btn btn-secondary" onclick="contactWhatsApp('I want more details about Enterprise Package')">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Digital Products Section -->
+    <div class="container" id="digital">
+        <div class="section-header">
+            <h2>💻 Digital Products</h2>
+            <p>Instant access to premium resources and tools</p>
+        </div>
+        <div class="products-grid">
+            <!-- Digital Product 1 -->
+            <div class="product-card">
+                <div class="card-icon">📚</div>
+                <h3>Complete Marketing Mastery eBook</h3>
+                <p>A comprehensive 200+ page guide covering modern marketing strategies, social media tactics, and conversion optimization.</p>
+                <div class="price">$49</div>
+                <ul class="features">
+                    <li>10 Detailed Chapters</li>
+                    <li>50+ Case Studies</li>
+                    <li>Downloadable Templates</li>
+                    <li>Lifetime Access</li>
+                    <li>Free Updates</li>
+                </ul>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="contactWhatsApp('Complete Marketing Mastery eBook - $49')">Buy Now</button>
+                    <button class="btn btn-secondary" onclick="contactWhatsApp('I want more details about Marketing Mastery eBook')">Learn More</button>
+                </div>
+            </div>
+
+            <!-- Digital Product 2 -->
+            <div class="product-card">
+                <div class="card-icon">🎓</div>
+                <h3>Sales Automation Course</h3>
+                <p>Master the art of automating your sales process with cutting-edge tools and proven frameworks.</p>
+                <div class="price">$199</div>
+                <ul class="features">
+                    <li>15 Video Modules</li>
+                    <li>Practical Assignments</li>
+                    <li>Automation Templates</li>
+                    <li>Community Access</li>
+                    <li>Certificate of Completion</li>
+                </ul>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="contactWhatsApp('Sales Automation Course - $199')">Enroll Now</button>
+                    <button class="btn btn-secondary" onclick="contactWhatsApp('I want more details about Sales Automation Course')">View Curriculum</button>
+                </div>
+            </div>
+
+            <!-- Digital Product 3 -->
+            <div class="product-card">
+                <div class="card-badge">New</div>
+                <div class="card-icon">⚙️</div>
+                <h3>CRM Management Software</h3>
+                <p>Powerful customer relationship management tool designed for small to medium businesses.</p>
+                <div class="price">$29 <span>/ month</span></div>
+                <ul class="features">
+                    <li>Unlimited Contacts</li>
+                    <li>Email Integration</li>
+                    <li>Task Automation</li>
+                    <li>Analytics Dashboard</li>
+                    <li>Mobile App Access</li>
+                </ul>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="contactWhatsApp('CRM Management Software - $29/month')">Start Free Trial</button>
+                    <button class="btn btn-secondary" onclick="contactWhatsApp('I want more details about CRM Software')">See Demo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Physical Products Section -->
+    <div class="container" id="physical">
+        <div class="section-header">
+            <h2>🛍️ Merchandise & Products</h2>
+            <p>Premium branded items and promotional materials</p>
+        </div>
+        <div class="products-grid">
+            <!-- Physical Product 1 -->
+            <div class="product-card">
+                <div class="card-icon">👕</div>
+                <h3>Premium Brand T-Shirt</h3>
+                <p>High-quality cotton t-shirt with our signature Expert Services logo. Available in multiple colors and sizes.</p>
+                <div class="price">$25</div>
+                <ul class="features">
+                    <li>100% Premium Cotton</li>
+                    <li>Multiple Sizes (S-XXL)</li>
+                    <li>Color Options Available</li>
+                    <li>Durable Print Quality</li>
+                    <li>Free Shipping on Orders $50+</li>
+                </ul>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="contactWhatsApp('Premium Brand T-Shirt - $25')">Order Now</button>
+                    <button class="btn btn-secondary" onclick="contactWhatsApp('I want more details about Premium T-Shirt')">Size Guide</button>
+                </div>
+            </div>
+
+            <!-- Physical Product 2 -->
+            <div class="product-card">
+                <div class="card-icon">📓</div>
+                <h3>Executive Planner</h3>
+                <p>Luxury leather-bound planner for professionals. Perfect for organizing your business goals and daily tasks.</p>
+                <div class="price">$45</div>
+                <ul class="features">
+                    <li>Genuine Leather Cover</li>
+                    <li>12-Month Layout</li>
+                    <li>Goal Setting Pages</li>
+                    <li>Premium Paper Quality</li>
+                    <li>Ribbon Bookmark</li>
+                </ul>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="contactWhatsApp('Executive Planner - $45')">Purchase</button>
+                    <button class="btn btn-secondary" onclick="contactWhatsApp('I want more details about Executive Planner')">Preview Pages</button>
+                </div>
+            </div>
+
+            <!-- Physical Product 3 -->
+            <div class="product-card">
+                <div class="card-icon">☕</div>
+                <h3>Branded Coffee Mug Set</h3>
+                <p>Premium ceramic mug set perfect for your office or as a gift. Comes in a beautiful presentation box.</p>
+                <div class="price">$35 <span>/ set of 2</span></div>
+                <ul class="features">
+                    <li>High-Quality Ceramic</li>
+                    <li>Microwave Safe</li>
+                    <li>Dishwasher Friendly</li>
+                    <li>Gift Box Included</li>
+                    <li>Set of 2 Mugs</li>
+                </ul>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="contactWhatsApp('Branded Coffee Mug Set - $35')">Add to Cart</button>
+                    <button class="btn btn-secondary" onclick="contactWhatsApp('I want more details about Coffee Mug Set')">View Images</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float" onclick="contactWhatsApp('Hello! I am interested in your products and services.')">
+        💬
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Expert Services & Experts International. All rights reserved.</p>
+        <p>Building lasting relationships through excellence and innovation.</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+    <script>
+        function contactWhatsApp(message) {
+            const phoneNumber = '923362308445';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        
+     // Smooth scroll for navigation (only for same-page links)
+document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        // Only prevent default if it's a section on the same page
+        if (targetId.startsWith('#')) {
+            e.preventDefault();
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        // If it's an external or another page link (like index.html), let it open normally
+    });
+});
+
+
+        // Add entrance animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
